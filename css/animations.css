@@ -1,0 +1,55 @@
+/* ============================================================
+   animations.css — Keyframes & Transitions
+   University of San Agustin Student Portal
+   ============================================================ */
+
+/* ── Fade In ─────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Fade Slide Down (banners, status messages) ──────────── */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Fade Slide Up (toasts from bottom) ─────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translate(-50%, 16px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ── Scale In (modals) ───────────────────────────────────── */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Slide In Right (mobile drawer) ─────────────────────── */
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+/* ── Spin (loading spinner) ──────────────────────────────── */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Pulse (progress bar shimmer) ───────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+/* ── Utility Classes ─────────────────────────────────────── */
+.animate-fade-in       { animation: fadeIn 0.2s ease-out both; }
+.animate-fade-slide    { animation: fadeSlideDown 0.2s ease-out both; }
+.animate-slide-up      { animation: fadeSlideUp 0.25s ease-out both; }
+.animate-scale-in      { animation: scaleIn 0.2s cubic-bezier(0.34,1.56,0.64,1) both; }
+.animate-slide-in-left { animation: slideInLeft 0.25s ease-out both; }
+.animate-spin          { animation: spin 0.8s linear infinite; }
+.animate-pulse         { animation: pulse 1.5s ease-in-out infinite; }

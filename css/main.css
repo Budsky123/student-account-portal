@@ -1,0 +1,11 @@
+/* ============================================================
+   main.css — Root CSS Entry Point
+   University of San Agustin Student Portal
+   ============================================================ */
+
+@import url('./tokens.css');
+@import url('./typography.css');
+@import url('./animations.css');
+@import url('./utilities.css');
+@import url('./layout.css');
+@import url('./components.css');

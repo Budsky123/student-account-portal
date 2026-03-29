@@ -1,0 +1,331 @@
+/* ============================================================
+   layout.css — Header, Nav, Skip Link, Main, Mobile Drawer
+   University of San Agustin Student Portal
+   ============================================================ */
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Skip Link ───────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0 0 var(--radius-input) var(--radius-input);
+  z-index: 9999;
+  transition: top var(--transition-fast);
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* ── Site Header ─────────────────────────────────────────── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--grad-header);
+  box-shadow: var(--shadow-sm);
+  padding: 0 1rem;
+}
+
+.header-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ── Branding ────────────────────────────────────────────── */
+.header-brand {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.header-brand-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-brand-sub {
+  font-size: 0.7rem;
+  color: var(--color-subtitle);
+  white-space: nowrap;
+}
+
+/* ── Hamburger ───────────────────────────────────────────── */
+.hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  background: rgba(255,255,255,0.5);
+  border-radius: var(--radius-input);
+  cursor: pointer;
+  color: var(--color-nav);
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+}
+.hamburger:hover { background: rgba(255,255,255,0.8); }
+.hamburger:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+/* ── Desktop Nav ─────────────────────────────────────────── */
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .nav-desktop { display: flex; }
+  .hamburger   { display: none; }
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-input);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-nav);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+.nav-link:hover { background: rgba(255,255,255,0.55); }
+.nav-link.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+.nav-link:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+.nav-link svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+
+/* ── Header Right Actions ────────────────────────────────── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+/* Bell / icon button ─────────────────────────────────────── */
+.icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  background: rgba(255,255,255,0.5);
+  border-radius: var(--radius-input);
+  cursor: pointer;
+  color: var(--color-nav);
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+}
+.icon-btn:hover { background: rgba(255,255,255,0.8); }
+.icon-btn:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+.icon-btn svg { width: 1.1rem; height: 1.1rem; }
+
+.notif-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.25rem;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #fff;
+}
+
+/* Avatar ───────────────────────────────────────────────────── */
+.header-avatar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avatar-circle {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: var(--grad-avatar);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.avatar-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-nav);
+  display: none;
+}
+@media (min-width: 640px) { .avatar-name { display: block; } }
+
+/* Logout button ─────────────────────────────────────────────── */
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border: none;
+  background: rgba(255,255,255,0.5);
+  border-radius: var(--radius-input);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-nav);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  white-space: nowrap;
+}
+.btn-logout:hover      { background: rgba(255,255,255,0.85); }
+.btn-logout:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+.btn-logout svg { width: 0.9rem; height: 0.9rem; }
+.btn-logout-text { display: none; }
+@media (min-width: 640px) { .btn-logout-text { display: inline; } }
+
+/* ── Mobile Drawer Overlay ───────────────────────────────── */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 45;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* ── Mobile Drawer ───────────────────────────────────────── */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18rem;
+  height: 100%;
+  background: var(--grad-mobile-nav);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1rem;
+  box-shadow: var(--shadow-lg);
+  animation: slideInLeft 0.25s ease-out;
+  overflow-y: auto;
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.mobile-drawer-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.mobile-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: rgba(255,255,255,0.6);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: var(--color-nav);
+}
+.mobile-close-btn:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-input);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-nav);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  margin-bottom: 0.25rem;
+}
+.mobile-nav-link:hover   { background: rgba(255,255,255,0.65); }
+.mobile-nav-link.active  { background: var(--color-primary); color: #fff; }
+.mobile-nav-link:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+.mobile-nav-link svg { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+.mobile-nav-chevron { margin-left: auto; width: 0.9rem; height: 0.9rem; opacity: 0.5; }
+
+/* ── Main Content ────────────────────────────────────────── */
+.main-content {
+  min-height: calc(100vh - 4rem);
+  padding: 1.5rem 1rem 3rem;
+}
+
+.page-container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* ── Full-page (Login/Register) ──────────────────────────── */
+.full-page {
+  min-height: 100vh;
+  background: var(--grad-page);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}

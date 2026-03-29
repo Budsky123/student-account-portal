@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile | Student Portal | University of San Agustin</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/main.css" />
+  
+  <!-- JS -->
+  <script src="../js/auth.js"></script>
+  <script>Auth.requireAuth();</script>
+  <script src="../js/layout.js" defer></script>
+  <script src="../js/design-note.js" defer></script>
+  <script src="../js/profile.js" defer></script>
+</head>
+<body class="bg-page">
+
+  <!-- Inject header -->
+  <div id="layout-header"></div>
+
+  <main id="main-content" class="main-content" tabindex="-1">
+    <div class="page-container space-y-6 max-w-7xl">
+      
+      <!-- Page Header -->
+      <div class="page-section-header" style="align-items: center;">
+        <div>
+          <h1 class="text-3xl font-bold text-heading">My Profile</h1>
+          <div class="text-sm text-subtitle mt-1">Manage your account and personal information</div>
+        </div>
+        <div data-design-note label="H7: Flexibility and Efficiency" type="heuristic"></div>
+      </div>
+
+      <div class="grid" data-grid-lg="3" style="align-items: start;">
+        
+        <!-- Left Column: Avatar & Quick Info -->
+        <div style="grid-column: span 1;" class="space-y-6">
+          <div class="profile-avatar-card">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar-circle" id="profile-avatar-initial">L</div>
+              <button class="profile-camera-btn" aria-label="Upload profile picture">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+              </button>
+            </div>
+            <div>
+              <div class="profile-name" id="profile-disp-name">Monkey D. Luffy</div>
+              <div class="profile-sub mt-1">Student ID: <span class="text-heading font-semibold" id="profile-disp-id">20251122</span></div>
+              <div class="profile-sub">BS Computer Science</div>
+            </div>
+          </div>
+          
+          <div class="card card-sm">
+            <h3 class="text-sm font-bold text-heading mb-3">Account Status</h3>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="text-sm text-body">Enrollment</span>
+              <span class="badge badge-success">Active</span>
+            </div>
+            <div class="divider"></div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="text-sm text-body">Library Access</span>
+              <span class="badge badge-success">Clear</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Forms -->
+        <div style="grid-column: span 1; @media(min-width: 1024px){grid-column: span 2;}" id="profile-forms-col" class="space-y-6">
+          
+          <!-- Banner container -->
+          <div id="status-banner" class="hidden"></div>
+          
+          <!-- Personal Info Form -->
+          <form id="profile-form" class="card space-y-4" novalidate>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h2 class="text-lg font-bold text-heading">Contact Information</h2>
+            </div>
+            
+            <div class="grid" data-grid-sm="2">
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address <span class="required-star" aria-label="required">*</span></label>
+                <input type="email" id="email" class="input-field" value="luffy@usa.edu.ph" required aria-required="true" />
+                <div id="email-err"></div>
+              </div>
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" id="phone" class="input-field" value="+63 912 345 6789" />
+                <div id="phone-err"></div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="address" class="form-label">Home Address</label>
+              <textarea id="address" class="input-field" rows="2" style="resize: vertical;">Foosha Village, East Blue</textarea>
+              <div id="address-err"></div>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+              <button type="submit" class="btn btn-primary" id="save-profile-btn" style="min-width: 120px;">
+                Save Changes
+              </button>
+            </div>
+          </form>
+
+          <!-- Password Settings -->
+          <form id="password-form" class="card space-y-4" novalidate>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h2 class="text-lg font-bold text-heading">Change Password</h2>
+            </div>
+            
+            <div class="form-group mb-4">
+              <label for="currentPassword" class="form-label">Current Password <span class="required-star" aria-label="required">*</span></label>
+              <div class="input-wrapper">
+                <input type="password" id="currentPassword" class="input-field has-right-icon" autocomplete="current-password" required aria-required="true" />
+                <button type="button" class="input-right-btn toggle-pw-btn" data-target="currentPassword" aria-label="Show password">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="lucide lucide-eye" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <div id="currentPassword-err"></div>
+            </div>
+            
+            <div class="grid" data-grid-sm="2">
+              <div class="form-group">
+                <label for="newPassword" class="form-label">New Password <span class="required-star" aria-label="required">*</span></label>
+                <div class="input-wrapper">
+                  <input type="password" id="newPassword" class="input-field has-right-icon" autocomplete="new-password" required aria-required="true" />
+                  <button type="button" class="input-right-btn toggle-pw-btn" data-target="newPassword" aria-label="Show password">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="lucide lucide-eye" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <div id="newPassword-err"></div>
+                
+                <div class="pw-strength" aria-live="polite">
+                  <div class="pw-req" id="req-len"><div class="pw-dot"></div> At least 8 chars</div>
+                  <div class="pw-req" id="req-up"><div class="pw-dot"></div> One uppercase</div>
+                  <div class="pw-req" id="req-num"><div class="pw-dot"></div> One number</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="confirmNewPassword" class="form-label">Confirm New Password <span class="required-star" aria-label="required">*</span></label>
+                <input type="password" id="confirmNewPassword" class="input-field" autocomplete="new-password" required aria-required="true" />
+                <div id="confirmNewPassword-err"></div>
+              </div>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+              <button type="submit" class="btn btn-secondary" id="save-password-btn" style="min-width: 160px;">
+                Update Password
+              </button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+      
+    </div>
+  </main>
+  
+  <script>
+    // Column span adjustment
+    const pFormCol = document.getElementById('profile-forms-col');
+    const resizeHandlerP = () => {
+      if (window.innerWidth >= 1024) {
+        pFormCol.style.gridColumn = 'span 2';
+      } else {
+        pFormCol.style.gridColumn = 'span 1';
+      }
+    };
+    window.addEventListener('resize', resizeHandlerP);
+    resizeHandlerP();
+  </script>
+
+</body>
+</html>

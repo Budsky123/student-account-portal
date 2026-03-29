@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Student Portal | University of San Agustin</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/main.css" />
+  
+  <!-- JS -->
+  <script src="../js/auth.js"></script>
+  <script>
+    // Guard: Redirect to login if not authenticated
+    Auth.requireAuth();
+  </script>
+  <script src="../js/layout.js" defer></script>
+  <script src="../js/design-note.js" defer></script>
+  <script src="../js/dashboard.js" defer></script>
+</head>
+<body class="bg-page">
+
+  <!-- Inject header here -->
+  <div id="layout-header"></div>
+
+  <main id="main-content" class="main-content" tabindex="-1">
+    <div class="page-container space-y-6">
+      
+      <!-- Greeting Header -->
+      <div class="page-section-header" style="align-items: center;">
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <h1 class="text-3xl font-bold text-heading" id="greeting-title">Good morning, Luffy! 👋</h1>
+        </div>
+        <div class="text-right sm-text-left">
+          <div class="text-sm font-semibold text-primary" id="today-date"></div>
+          <div class="text-xs text-muted mt-1">1st Semester, A.Y. 2025-2026</div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="grid" data-grid-sm="3">
+        <!-- GPA -->
+        <div class="stat-card">
+          <div class="icon-container md" style="background: #FFE4EC; color: var(--color-accent);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div class="stat-card-body">
+            <div class="stat-label">Current GPA</div>
+            <div class="stat-value">1.50</div>
+          </div>
+        </div>
+        <!-- Units -->
+        <div class="stat-card">
+          <div class="icon-container md" style="background: #EBF4FE; color: var(--color-primary);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="stat-card-body">
+            <div class="stat-label">Enrolled Units</div>
+            <div class="stat-value">8</div>
+            <div class="stat-sub">of 21 allowed</div>
+          </div>
+        </div>
+        <!-- Classes Today -->
+        <div class="stat-card">
+          <div class="icon-container md" style="background: #E6FAF0; color: #27AE60;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+          </div>
+          <div class="stat-card-body">
+            <div class="stat-label">Classes Today</div>
+            <div class="stat-value">2</div>
+            <div class="stat-sub">CS 223 & GE 8</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Grid (Courses + Announcements) -->
+      <div class="grid" data-grid-lg="3">
+        
+        <!-- Enrolled Courses Column -->
+        <div style="grid-column: span 1; @media(min-width: 1024px){grid-column: span 2;}" id="dash-courses-col">
+          <div class="page-section-header">
+            <div>
+              <h2 class="page-section-title">Your Classes This Semester</h2>
+              <div class="page-section-sub">Click on a course to view details</div>
+            </div>
+            <div data-design-note label="H2: Match Real World" type="heuristic"></div>
+          </div>
+          
+          <div class="space-y-4" role="list" aria-label="Your enrolled classes" id="dash-courses-list">
+            <!-- Courses rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Announcements Column -->
+        <div style="grid-column: span 1;">
+          <div class="page-section-header">
+            <h2 class="page-section-title">Announcements</h2>
+          </div>
+          
+          <div class="card card-sm space-y-4" role="list" aria-label="Announcements and notifications" id="dash-announcements-list">
+            <!-- Announcements rendered by JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Actions Grid -->
+      <div class="mt-6">
+        <div class="page-section-header">
+          <h2 class="page-section-title">Quick Actions</h2>
+          <div data-design-note label="H8: Minimalist/Aesthetic" type="heuristic"></div>
+        </div>
+        
+        <div class="grid" data-grid-sm="2" data-grid-lg="4">
+          <a href="courses.html" class="card-action">
+            <div class="icon-container lg" style="background: #EBF4FE; color: var(--color-primary);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <span class="font-semibold">Register for Classes</span>
+          </a>
+          
+          <a href="grades.html" class="card-action">
+            <div class="icon-container lg" style="background: #FFE4EC; color: var(--color-accent);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a2 2 0 0 1-.019 1.838L12.83 21.45a2 2 0 0 1-3.66 0l-8.571-8.69a2 2 0 0 1-.019-1.838l8.572-8.69a2 2 0 0 1 3.658 0z"/><path d="M14 11.1v4.8"/><path d="M7.7 15.2 6 12l1.7-3.2"/></svg>
+            </div>
+            <span class="font-semibold">View My Grades</span>
+          </a>
+          
+          <a href="profile.html" class="card-action">
+            <div class="icon-container lg" style="background: #E6FAF0; color: #27AE60;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="font-semibold">Update Profile</span>
+          </a>
+          
+          <a href="courses.html" class="card-action">
+            <div class="icon-container lg" style="background: #FEF3C7; color: #B45309;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+            </div>
+            <span class="font-semibold">Class Schedule</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

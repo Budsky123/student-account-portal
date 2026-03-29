@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Portal – Build Checklist</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:       #FADADD;
+      --blue:       #B3D9F7;
+      --page-bg:    #FEF0F5;
+      --primary:    #5B9BD5;
+      --primary-lt: #7BBCF0;
+      --accent:     #E88FAB;
+      --deep-pink:  #B5295A;
+      --heading:    #1A1A2E;
+      --nav:        #2D3556;
+      --subtitle:   #5B7BA8;
+      --body:       #4B5563;
+      --muted:      #6B7280;
+      --card:       #FFFFFF;
+      --divider:    #F3E0E8;
+      --success-bg: #E6FAF0;
+      --success-tx: #166534;
+      --success-bd: #86EFAC;
+      --warn-bg:    #FFFBEB;
+      --warn-tx:    #B45309;
+      --warn-bd:    #FCD34D;
+    }
+
+    html { font-size: 16px; font-family: 'Inter', sans-serif; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #FADADD 0%, #EBF4FE 60%, #B3D9F7 100%);
+      padding: 2rem 1rem 4rem;
+      color: var(--heading);
+    }
+
+    /* ── Page header ──────────────────────────────────────── */
+    .page-header {
+      max-width: 860px;
+      margin: 0 auto 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .page-header .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: #FFE4EC;
+      color: var(--deep-pink);
+      border: 1px solid #F9A8C9;
+      width: fit-content;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--heading);
+      line-height: 1.2;
+    }
+
+    .page-header p {
+      color: var(--subtitle);
+      font-size: 0.95rem;
+    }
+
+    /* ── Global progress bar ─────────────────────────────── */
+    .global-progress-card {
+      max-width: 860px;
+      margin: 0 auto 2rem;
+      background: var(--card);
+      border-radius: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 2px 12px rgba(91,155,213,0.10);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .global-progress-card .prog-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--nav);
+    }
+
+    .prog-bar-track {
+      height: 10px;
+      border-radius: 9999px;
+      background: #F3E0E8;
+      overflow: hidden;
+    }
+
+    .prog-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #E88FAB, #5B9BD5);
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── Filter tabs ──────────────────────────────────────── */
+    .filter-row {
+      max-width: 860px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      border: 2px solid #F9A8C9;
+      background: white;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #5B9BD5, #7BBCF0);
+      border-color: transparent;
+      color: white;
+    }
+
+    /* ── Feature group card ───────────────────────────────── */
+    .feature-group {
+      max-width: 860px;
+      margin: 0 auto 1.25rem;
+      background: var(--card);
+      border-radius: 1.25rem;
+      box-shadow: 0 2px 12px rgba(91,155,213,0.08);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .feature-group:hover { box-shadow: 0 4px 24px rgba(91,155,213,0.16); }
+
+    /* group header / toggle */
+    .group-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      border-bottom: 1px solid transparent;
+      transition: background 0.15s;
+    }
+
+    .group-header:hover { background: #FEF0F5; }
+
+    .group-header.open { border-bottom-color: var(--divider); }
+
+    .group-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .group-meta { flex: 1; min-width: 0; }
+
+    .group-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--heading);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .group-subtitle {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    .group-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .group-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+    }
+
+    .group-count.done   { background: var(--success-bg); color: var(--success-tx); }
+    .group-count.partial { background: #EBF4FE; color: var(--primary); }
+    .group-count.none   { background: #F3F4F6; color: var(--muted); }
+
+    .chevron {
+      width: 1.1rem;
+      height: 1.1rem;
+      color: var(--muted);
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+    }
+
+    .group-header.open .chevron { transform: rotate(180deg); }
+
+    /* mini progress inside header */
+    .mini-prog-track {
+      width: 72px;
+      height: 5px;
+      border-radius: 9999px;
+      background: #F3E0E8;
+      overflow: hidden;
+    }
+
+    .mini-prog-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #E88FAB, #5B9BD5);
+      transition: width 0.5s;
+    }
+
+    /* ── Step list ────────────────────────────────────────── */
+    .step-list {
+      display: none;
+      padding: 0.5rem 0 0.75rem;
+    }
+
+    .step-list.open { display: block; }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 0.75rem;
+      margin: 0.15rem 0.5rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
+    }
+
+    .step-item:hover { background: #FEF0F5; }
+
+    .step-item.completed { opacity: 0.6; }
+
+    .checkbox {
+      width: 1.1rem;
+      height: 1.1rem;
+      border-radius: 0.35rem;
+      border: 2px solid #F9A8C9;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      transition: all 0.2s;
+    }
+
+    .step-item.completed .checkbox {
+      background: linear-gradient(135deg, #5B9BD5, #7BBCF0);
+      border-color: transparent;
+    }
+
+    .checkmark {
+      width: 0.55rem;
+      height: 0.55rem;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+      display: none;
+    }
+
+    .step-item.completed .checkmark { display: block; }
+
+    .step-text {
+      font-size: 0.88rem;
+      color: var(--body);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .step-item.completed .step-text {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .step-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    /* ── Tag colours ─────────────────────────────────────── */
+    .tag-ui       { background: #FFE4EC; color: #B5295A; }
+    .tag-logic    { background: #EBF4FE; color: #1E5FA8; }
+    .tag-a11y     { background: #FFF3E0; color: #B45309; }
+    .tag-data     { background: #E6FAF0; color: #166534; }
+    .tag-routing  { background: #F3E8FF; color: #7E22CE; }
+
+    /* ── Empty state ─────────────────────────────────────── */
+    .no-results {
+      max-width: 860px;
+      margin: 3rem auto;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    .footer {
+      max-width: 860px;
+      margin: 2rem auto 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--subtitle);
+    }
+
+    /* ── Animations ──────────────────────────────────────── */
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-list.open { animation: fadeSlide 0.2s ease-out; }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .page-header h1 { font-size: 1.4rem; }
+      .mini-prog-track { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Page Header ──────────────────────────────────────── -->
+<div class="page-header">
+  <span class="badge">📋 Build Checklist</span>
+  <h1>University of San Agustin — Student Portal</h1>
+  <p>Version 1.0.0 · React + TypeScript + Tailwind CSS v4 · All features from the Design Doc</p>
+</div>
+
+<!-- ── Global Progress ──────────────────────────────────── -->
+<div class="global-progress-card">
+  <div class="prog-label">
+    <span id="global-label">Overall Progress</span>
+    <span id="global-pct">0 / 0 steps</span>
+  </div>
+  <div class="prog-bar-track">
+    <div class="prog-bar-fill" id="global-fill" style="width:0%"></div>
+  </div>
+</div>
+
+<!-- ── Filter Tabs ──────────────────────────────────────── -->
+<div class="filter-row" role="group" aria-label="Filter tasks">
+  <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+  <button class="filter-btn" onclick="setFilter('incomplete', this)">Incomplete</button>
+  <button class="filter-btn" onclick="setFilter('completed', this)">Completed</button>
+  <button class="filter-btn" onclick="setFilter('ui', this)">🎨 UI</button>
+  <button class="filter-btn" onclick="setFilter('logic', this)">⚙️ Logic</button>
+  <button class="filter-btn" onclick="setFilter('a11y', this)">♿ A11y</button>
+  <button class="filter-btn" onclick="setFilter('data', this)">💾 Data</button>
+  <button class="filter-btn" onclick="setFilter('routing', this)">🔀 Routing</button>
+</div>
+
+<!-- ── Feature Groups ──────────────────────────────────── -->
+<div id="groups-container"></div>
+<p class="no-results" id="no-results">No tasks match this filter.</p>
+
+<div class="footer">
+  University of San Agustin Student Portal · Build Checklist · v1.0.0
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   DATA – features derived from DESIGN_DOC.md
+═══════════════════════════════════════════════════════════ */
+const FEATURES = [
+  {
+    id: "f1",
+    title: "Project Setup & Architecture",
+    subtitle: "Scaffold, routing, CSS layers, font imports",
+    icon: "🏗️",
+    iconBg: "#EBF4FE",
+    steps: [
+      { text: "Initialise Vite + React + TypeScript project with `npx create-vite@latest`", tags: ["routing"] },
+      { text: "Install core deps: react-router v7, lucide-react, tailwindcss v4, @tailwindcss/vite, tw-animate-css", tags: ["routing"] },
+      { text: "Create `/src/styles/fonts.css` — import Inter 400/500/600/700 from Google Fonts", tags: ["ui"] },
+      { text: "Create `/src/styles/tailwind.css` — `@import 'tailwindcss' source(none)` + `@source` directive + tw-animate-css", tags: ["ui"] },
+      { text: "Create `/src/styles/theme.css` — CSS custom properties, base typography (h1-h4, label, button, input), dark mode tokens", tags: ["ui"] },
+      { text: "Create `/src/styles/index.css` — root entry that imports fonts.css, tailwind.css, theme.css", tags: ["ui"] },
+      { text: "Create `/src/app/routes.ts` — `createBrowserRouter` with Login (/), Register (/register), Layout (/portal) + children", tags: ["routing"] },
+      { text: "Create `/src/app/App.tsx` — root component rendering `<RouterProvider router={router} />`", tags: ["routing"] },
+      { text: "Add placeholder page files: Login.tsx, Register.tsx, Dashboard.tsx, Courses.tsx, Grades.tsx, Profile.tsx", tags: ["routing"] },
+      { text: "Copy `/src/app/components/figma/ImageWithFallback.tsx` — mark as [PROTECTED – DO NOT MODIFY]", tags: ["ui"] },
+    ]
+  },
+  {
+    id: "f2",
+    title: "Design System & Tokens",
+    subtitle: "Color palette, gradients, spacing, focus styles",
+    icon: "🎨",
+    iconBg: "#FFE4EC",
+    steps: [
+      { text: "Define primary palette CSS vars: --pink #FADADD, --blue #B3D9F7, --page-bg #FEF0F5, --primary #5B9BD5, --accent #E88FAB, --deep-pink #B5295A", tags: ["ui"] },
+      { text: "Define text-color vars: --heading #1A1A2E, --nav #2D3556, --subtitle #5B7BA8, --body #4B5563, --muted #6B7280, --placeholder #9CA3AF", tags: ["ui"] },
+      { text: "Define semantic color sets (success / error / warning / info) with bg, border, and text values", tags: ["ui"] },
+      { text: "Define surface vars: --card #FFFFFF, --input-bg #FAFAFA, --input-border #F9A8C9, --divider #F3E0E8", tags: ["ui"] },
+      { text: "Document gradient tokens: Header, Page Background, Primary Button, Avatar, Mobile Nav, GPA cards, Progress bars", tags: ["ui"] },
+      { text: "Define spacing/sizing conventions: card (rounded-2xl, p-5–p-8, shadow-sm), input (rounded-xl, px-3 py-2.5), button (rounded-xl, py-3 px-4)", tags: ["ui"] },
+      { text: "Set global focus standard: `focus:outline-2 focus:outline-offset-2` with outlineColor #5B9BD5 on ALL interactive elements", tags: ["a11y"] },
+    ]
+  },
+  {
+    id: "f3",
+    title: "Shared Layout Component",
+    subtitle: "Header, desktop nav, mobile drawer, skip link",
+    icon: "🏠",
+    iconBg: "#E6FAF0",
+    steps: [
+      { text: "Create `/src/app/components/Layout.tsx` with state: mobileOpen (bool), notifications = 2", tags: ["ui"] },
+      { text: "Add `<a>` skip-to-main-content link (sr-only, visible on focus, styled with blue bg) linking to #main-content", tags: ["a11y"] },
+      { text: "Build sticky `<header role=\"banner\">` with gradient #FADADD→#B3D9F7 and max-w-7xl container", tags: ["ui"] },
+      { text: "Left section: hamburger button (lg:hidden) with aria-expanded + aria-controls=\"mobile-nav\" + Menu/X icons", tags: ["a11y"] },
+      { text: "Left section: University logo/branding — \"University of San Agustin\" title + subtitle", tags: ["ui"] },
+      { text: "Center: desktop `<nav role=\"navigation\" aria-label=\"Main navigation\">` (hidden lg:flex) with 4 NavLinks", tags: ["routing"] },
+      { text: "NavLink active style: bg #5B9BD5, white text. Inactive: transparent, nav text #2D3556", tags: ["ui"] },
+      { text: "navItems array: Dashboard (LayoutDashboard, end:true), My Courses (BookOpen), Grades (GraduationCap), My Profile (User)", tags: ["routing"] },
+      { text: "Right section: Bell notification button with badge (#E88FAB) showing count when notifications > 0, aria-label including count", tags: ["ui", "a11y"] },
+      { text: "Right section: Avatar circle (gradient #E88FAB→#5B9BD5) showing \"L\" initial. Name \"Monkey D. Luffy\" visible at sm:", tags: ["ui"] },
+      { text: "Right section: Logout button — navigates to / via useNavigate. Text \"Log Out\" hidden below sm:", tags: ["ui"] },
+      { text: "Mobile drawer: conditional on mobileOpen — overlay (bg-black/20) + drawer (w-72, gradient bg, role=\"dialog\" aria-modal=\"true\")", tags: ["ui", "a11y"] },
+      { text: "Mobile nav links with ChevronRight icons. Clicking overlay or any link closes drawer (setMobileOpen(false))", tags: ["ui"] },
+      { text: "Add `<main id=\"main-content\" tabIndex={-1}>` wrapping `<Outlet />`", tags: ["a11y"] },
+    ]
+  },
+  {
+    id: "f4",
+    title: "DesignNote Component",
+    subtitle: "Inline annotation badges for heuristics/WCAG/consistency",
+    icon: "📌",
+    iconBg: "#FFF3E0",
+    steps: [
+      { text: "Create `/src/app/components/DesignNote.tsx` with props: label (string), type ('heuristic'|'wcag'|'consistency'), className?", tags: ["ui"] },
+      { text: "Type 'heuristic': emoji 📌, bg #FFE4EC, text #B5295A, border #F9A8C9", tags: ["ui"] },
+      { text: "Type 'wcag': emoji ♿, bg #E0F0FF, text #1E5FA8, border #90CAF9", tags: ["ui", "a11y"] },
+      { text: "Type 'consistency': emoji 🎨, bg #FFF3E0, text #B45309, border #FCD34D", tags: ["ui"] },
+      { text: "Base style: inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[11px] font-semibold tracking-wide", tags: ["ui"] },
+    ]
+  },
+  {
+    id: "f5",
+    title: "Login Page",
+    subtitle: "Form validation, loading state, simulated auth, dynamic borders",
+    icon: "🔐",
+    iconBg: "#FFE4EC",
+    steps: [
+      { text: "Create `/src/app/pages/Login.tsx` — full-page layout (not in Layout), gradient background #FADADD→#EBF4FE→#B3D9F7", tags: ["ui"] },
+      { text: "State: studentId, password, showPassword, errors (studentId/password), isLoading, loginStatus ('idle'|'loading'|'success'|'error')", tags: ["logic"] },
+      { text: "Build header: \"University of San Agustin\" h1 + \"Student Portal - Sign In\" subtitle", tags: ["ui"] },
+      { text: "Build status banner: loading spinner (\"Signing you in, please wait...\") and success banner (\"Login successful! Redirecting...\") with role=\"status\" aria-live=\"polite\"", tags: ["ui", "a11y"] },
+      { text: "White card (rounded-2xl shadow-lg p-8): Student ID field with inputMode=\"numeric\", autoComplete=\"username\"", tags: ["ui", "a11y"] },
+      { text: "Hint text below Student ID: \"Your 8-10 digit student ID from your enrollment form.\" id=\"studentId-hint\"", tags: ["ui", "a11y"] },
+      { text: "Password field with autoComplete=\"current-password\" + Eye/EyeOff show/hide toggle button (aria-label)", tags: ["ui", "a11y"] },
+      { text: "Dynamic border/bg: default #F9A8C9 / #FAFAFA → valid (has value, no error) #27AE60 → error #C0392B / #FFF5F5", tags: ["ui"] },
+      { text: "Validation: Student ID required + /^\\d{8,10}$/ regex. Password required + min 6 chars. Show specific error messages.", tags: ["logic"] },
+      { text: "Submit: validate() → setIsLoading(true) → setTimeout 1200ms → error if '00000000'+'wrong', otherwise success → navigate('/portal') after 800ms", tags: ["logic"] },
+      { text: "Add 'Forgot password?' link below password field", tags: ["ui"] },
+      { text: "Add separator (border-t) + \"New student? Create your account here\" link to /register", tags: ["ui"] },
+      { text: "Add help tip box (semi-transparent, Info icon): contact registrar@usa.edu.ph", tags: ["ui", "a11y"] },
+      { text: "Add skip link \"Skip to login form\" → #login-form", tags: ["a11y"] },
+      { text: "Wrap form with noValidate. All error messages: AlertCircle icon + role=\"alert\" + aria-describedby linking input to error", tags: ["a11y"] },
+      { text: "Add DesignNote badges: H6 (Recognition), H9 (Error Recovery), WCAG 1.4.3 (Contrast)", tags: ["a11y"] },
+    ]
+  },
+  {
+    id: "f6",
+    title: "Registration Page",
+    subtitle: "3-step wizard, progress bar, per-step validation, password strength",
+    icon: "📝",
+    iconBg: "#EBF4FE",
+    steps: [
+      { text: "Create `/src/app/pages/Register.tsx` — full-page layout, same gradient bg as Login", tags: ["ui"] },
+      { text: "State: step (1|2|3), showPassword, submitted, isLoading, form (FormData), errors (Partial<FormData>)", tags: ["logic"] },
+      { text: "FormData interface: firstName, lastName, email, studentId, program, yearLevel, password, confirmPassword, agreeTerms", tags: ["data"] },
+      { text: "Build step progress bar: numbered circles 1-2-3 with labels and completed checkmarks. width = ((step-1)/2)*100+50 percent. gradient #E88FAB→#5B9BD5. role=\"progressbar\" aria-valuenow/min/max", tags: ["ui", "a11y"] },
+      { text: "Step 1 (Personal Info): firstName*, lastName*, email* (valid format), studentId* (/^\\d{8,10}$/) — all with placeholders \"e.g. Juan\" etc.", tags: ["ui", "logic"] },
+      { text: "Step 2 (Academic Info): program* (dropdown, 8 options), yearLevel* (dropdown 1st-5th). Info box: \"Your program and year level determine which classes...\"", tags: ["ui", "logic"] },
+      { text: "PROGRAMS list: BS Computer Science, BS Information Technology, BS Business Administration, BS Accountancy, BS Nursing, AB Communication, BS Education, BS Engineering", tags: ["data"] },
+      { text: "Step 3 (Create Password): password* (min 8 chars, uppercase required), confirmPassword* (must match), agreeTerms* (checkbox). showPassword toggle.", tags: ["ui", "logic"] },
+      { text: "Password strength indicators: 3 inline dots — ≥8 chars, one uppercase, one number. Green #27AE60 when met, #D1D5DB when not.", tags: ["ui", "logic"] },
+      { text: "Back button (steps 2-3): border-2 #F9A8C9, text #B5295A, ChevronLeft icon. Continue button (steps 1-2): primary gradient, ChevronRight icon.", tags: ["ui"] },
+      { text: "Create Account button (step 3): primary gradient, disabled + \"Creating account...\" while loading. setTimeout 1500ms.", tags: ["ui", "logic"] },
+      { text: "Success screen (submitted === true): green checkmark circle, \"Account Created!\", \"Welcome, {firstName}!\", confirmation email note, \"Go to Sign In\" → /", tags: ["ui"] },
+      { text: "onChange handler clears the specific field's error when user types", tags: ["logic"] },
+      { text: "Add DesignNote badges: H1 (System Status – progress), H5 (Error Prevention), H9 (Error Recovery), WCAG 1.4.3", tags: ["a11y"] },
+      { text: "All required fields marked with red asterisk `*` in aria-label. All inputs have aria-invalid, aria-required, aria-describedby.", tags: ["a11y"] },
+    ]
+  },
+  {
+    id: "f7",
+    title: "Dashboard Page",
+    subtitle: "Greeting, quick stats, enrolled courses, announcements, quick actions",
+    icon: "📊",
+    iconBg: "#E6FAF0",
+    steps: [
+      { text: "Create `/src/app/pages/Dashboard.tsx` — page header: \"Good morning, Luffy! 👋\" + today's date (en-PH locale) + semester info", tags: ["ui"] },
+      { text: "Today's date: new Date().toLocaleDateString('en-PH', { weekday:'long', year:'numeric', month:'long', day:'numeric' })", tags: ["logic"] },
+      { text: "Quick Stats grid (responsive: 1→3 cols): Current GPA 1.50 (TrendingUp, #E88FAB), Enrolled Units 8/21 (BookOpen, #5B9BD5), Classes Today 2 (Calendar, #27AE60)", tags: ["ui", "data"] },
+      { text: "Main grid lg:grid-cols-3: Enrolled Courses (lg:col-span-2) + Announcements sidebar (col-span-1)", tags: ["ui"] },
+      { text: "Enrolled Courses section: 3 course cards — CS 223, CS 221, GE 8. Each: BookOpen icon, code+name, Clock icon+schedule, 📍+room, units badge", tags: ["ui", "data"] },
+      { text: "Announcements section: 2 items — info type (Enrollment open, Mar 10), success type (Tuition received, Mar 5). Styled by type (bg, border, icon, badge)", tags: ["ui", "data"] },
+      { text: "Quick Actions grid (2→4 cols): Register for Classes, View My Grades, Update Profile, Class Schedule — each with icon, label, NavLink/Link to route", tags: ["ui", "routing"] },
+      { text: "All sections use aria-label, role=\"list\"/\"listitem\" on course/announcement lists", tags: ["a11y"] },
+    ]
+  },
+  {
+    id: "f8",
+    title: "My Courses Page",
+    subtitle: "Add/drop flow, modals, toast with undo, units progress bar",
+    icon: "📚",
+    iconBg: "#E6FAF0",
+    steps: [
+      { text: "Create `/src/app/pages/Courses.tsx`. State: enrolled[], search, confirmDrop, confirmAdd, recentlyDropped, toast ({message, type}|null)", tags: ["logic"] },
+      { text: "Course interface: id, code, name, units, schedule, room, enrolled (count), capacity, prereq? (optional)", tags: ["data"] },
+      { text: "Initial enrolled courses (3): CS 223, CS 221, GE 8 with enrollment/capacity counts", tags: ["data"] },
+      { text: "Available courses (4): CS 677, CS 225, CS 251, CS 213 — hidden if already enrolled", tags: ["data"] },
+      { text: "Header: \"My Classes\" + semester + \"{totalUnits} / 20 units enrolled\"", tags: ["ui"] },
+      { text: "Units progress bar: role=\"progressbar\" aria-valuenow/max=20. Normal gradient #E88FAB→#5B9BD5. Warning gradient #F59E0B→#EF4444 at >18 units. Warning text alert at 20 units.", tags: ["ui", "logic", "a11y"] },
+      { text: "Drop button on each enrolled card → sets confirmDrop. Add button on available cards → sets confirmAdd (disabled if full or would exceed 20 units).", tags: ["ui", "logic"] },
+      { text: "Drop Confirmation Modal: fixed overlay bg-black/30, rounded-2xl card, Cancel (autoFocus) + \"Yes, Drop Class\" buttons", tags: ["ui", "a11y"] },
+      { text: "Add Confirmation Modal: shows new total units, Cancel + Confirm buttons", tags: ["ui"] },
+      { text: "On drop confirm: remove from enrolled, set recentlyDropped, show toast with Undo button (8s window), close modal", tags: ["logic"] },
+      { text: "Toast: fixed bottom center, role=\"status\" aria-live=\"polite\", auto-dismiss 4000ms. Undo button restores course within 8000ms.", tags: ["ui", "logic", "a11y"] },
+      { text: "Empty state (0 enrolled): dashed border 2px #F9A8C9, BookOpen icon in pink, instructional text", tags: ["ui"] },
+      { text: "Add DesignNote badges: H1 (System Status - units), H3 (User Control - undo/cancel), H5 (Error Prevention - disabled add)", tags: ["a11y"] },
+    ]
+  },
+  {
+    id: "f9",
+    title: "Grades Page",
+    subtitle: "GPA cards, grade color coding, accordion semesters, grade scale legend",
+    icon: "🎓",
+    iconBg: "#F3E8FF",
+    steps: [
+      { text: "Create `/src/app/pages/Grades.tsx`. State: openSemesters (Set<number>, default: Set([0]))", tags: ["logic"] },
+      { text: "Grade interface: code, name, units, prelim, midterm, finals, finalGrade (all number|null), remarks (string)", tags: ["data"] },
+      { text: "Seed 3 semesters of data: Current (4 subjects, all In Progress), 2nd Sem 2024-25 (5 subjects, all Passed), 1st Sem 2024-25 (4 subjects, all Passed)", tags: ["data"] },
+      { text: "Compute Cumulative GWA: sum(units*finalGrade)/sum(units) for all non-null finalGrades", tags: ["logic"] },
+      { text: "Compute Current Midterm Avg: simple avg of midterm grades in semester index 0 where midterm !== null", tags: ["logic"] },
+      { text: "Compute Total Units Completed: sum of units for all completed (non-null finalGrade) courses", tags: ["logic"] },
+      { text: "GPA Summary Cards row (3 cards): Cumulative GWA (pink gradient), Current Midterm Avg (blue gradient), Units Completed (green gradient)", tags: ["ui"] },
+      { text: "Grade Scale Legend: horizontal row of pills — 1.00=Excellent (green), 1.25-1.50=Very Good (blue), 1.75-2.00=Average (yellow), 2.25-3.00=Passing (red), 5.00=Failed (gray)", tags: ["ui"] },
+      { text: "gradeToColor() function: null→gray, ≤1.25→green, ≤1.75→blue, ≤2.25→yellow, ≤3.00→red", tags: ["logic"] },
+      { text: "gradeToLabel() function: null→'Not yet posted', 1.00→'Excellent', ≤1.25→'Very Good', ≤1.50→'Good', ≤1.75→'Above Average', ≤2.00→'Average', ≤2.25→'Below Average', ≤2.50→'Fair', ≤3.00→'Passing', else→'Failed'", tags: ["logic"] },
+      { text: "Accordion per semester: button header with aria-expanded + aria-controls. TrendingUp icon, semester name, subject count, unit count, GWA pill.", tags: ["ui", "a11y"] },
+      { text: "Current semester badge: blue pill \"Current\" on index 0. Multiple accordions can be open simultaneously.", tags: ["ui"] },
+      { text: "Grade table: <table> with <thead> and <tbody>. Columns: Subject, Units, Prelim, Midterm, Finals, Final Grade, Remarks. <th scope=\"col\"> on headers.", tags: ["ui", "a11y"] },
+      { text: "Null handling: period grades → em-dash \"—\", remarks 'In Progress' → blue badge, 'Passed' → green badge, 'Failed' → red badge. Alternating row colors: even #FFFFFF, odd #FAFAFA.", tags: ["ui", "logic"] },
+      { text: "overflow-x-auto wrapper on table for mobile horizontal scroll", tags: ["ui"] },
+    ]
+  },
+  {
+    id: "f10",
+    title: "Profile Page",
+    subtitle: "Editable form, validation, save simulation, unsaved changes warning",
+    icon: "👤",
+    iconBg: "#EBF4FE",
+    steps: [
+      { text: "Create `/src/app/pages/Profile.tsx`. State: form (ProfileForm), original (ProfileForm), errors, saved, isLoading, hasChanges", tags: ["logic"] },
+      { text: "ProfileForm interface: firstName (\"Luffy\"), lastName (\"\"), email (\"luffy@usa.edu.ph\"), phone (\"09171234567\"), address (\"Tigbauan, Iloilo\"), emergencyContact, emergencyPhone", tags: ["data"] },
+      { text: "hasChanges computed: true when form differs from original (JSON.stringify comparison or field-by-field)", tags: ["logic"] },
+      { text: "Profile Avatar Card: gradient circle (135deg, #E88FAB, #5B9BD5) with initials \"JD\" + camera overlay button (aria-label: \"Change profile photo\")", tags: ["ui", "a11y"] },
+      { text: "Avatar card: display Name, Student ID (20210001), Program/Year (BS Computer Science / 2nd Year)", tags: ["ui", "data"] },
+      { text: "Dismissible success banner (CheckCircle2, green bg #E6FAF0, border #86EFAC) shown when saved===true. With dismiss button aria-label=\"Dismiss success message\"", tags: ["ui", "a11y"] },
+      { text: "Unsaved Changes Warning banner (Info icon, yellow bg) shown when hasChanges===true", tags: ["ui"] },
+      { text: "Personal Information card: First Name* / Last Name* (2-col grid sm:), Email Address*, Mobile Number, Address", tags: ["ui"] },
+      { text: "Emergency Contact card: Contact Name / Contact Number (2-col grid sm:)", tags: ["ui"] },
+      { text: "Academic Information card (read-only, bg #EBF4FE, border #90CAF9): Student ID / Program / Year Level — 3-col grid sm:", tags: ["ui"] },
+      { text: "Validation: firstName required, lastName required, email required + valid format. phone/emergencyPhone (if provided) → /^(09|\\+639)\\d{9}$/", tags: ["logic"] },
+      { text: "Save Changes: disabled when !hasChanges or isLoading. setTimeout 1200ms → set saved=true, hasChanges=false.", tags: ["logic"] },
+      { text: "Discard Changes: disabled when !hasChanges. Resets form to original values.", tags: ["logic"] },
+      { text: "All inputs: dynamic border (valid #27AE60, error #C0392B, default #F9A8C9), aria-invalid, aria-required, aria-describedby, autoComplete attributes.", tags: ["a11y"] },
+    ]
+  },
+  {
+    id: "f11",
+    title: "Nielsen's Heuristics",
+    subtitle: "H1, H2, H3, H5, H6, H8, H9, H10 – implementations across all pages",
+    icon: "📐",
+    iconBg: "#FFF3E0",
+    steps: [
+      { text: "H1 – Visibility of System Status: loading spinners on Login + Profile, step progress bar on Register, units progress bar on Courses, notification bell badge in Layout", tags: ["ui", "a11y"] },
+      { text: "H2 – Match Between System and the Real World: use plain language labels (\"Mobile Number\" not \"tel\"), \"My Classes\" not \"Enrolled Course Records\", \"Good morning, Luffy!\" greeting", tags: ["ui"] },
+      { text: "H3 – User Control and Freedom: Cancel button (autoFocus) in all modals, Undo action in Courses drop toast (8s), Back button on Register steps 2-3, Discard Changes on Profile", tags: ["ui"] },
+      { text: "H5 – Error Prevention: dropdowns for program/yearLevel on Register step 2, Add button disabled when full or >20 units, inputMode=\"numeric\" on Student ID, noValidate + custom validation on all forms", tags: ["logic", "a11y"] },
+      { text: "H6 – Recognition Rather Than Recall: placeholder text \"e.g. 20210001\" / \"e.g. Juan\" on all inputs, hint text below Student ID on Login, info box on Register step 2", tags: ["ui"] },
+      { text: "H8 – Aesthetic and Minimalist Design: clean card-based layout, generous whitespace, Quick Actions on Dashboard for direct navigation, read-only academic info visually separated on Profile", tags: ["ui"] },
+      { text: "H9 – Help Users Recover from Errors: specific error messages with examples (\"e.g. 20210001\"), AlertCircle icon + role=\"alert\", red border + pink bg on error inputs", tags: ["ui", "a11y"] },
+      { text: "H10 – Help and Documentation: help tip box with registrar email on Login, step-specific info notes on Register, grade scale legend on Grades", tags: ["ui"] },
+    ]
+  },
+  {
+    id: "f12",
+    title: "WCAG Accessibility",
+    subtitle: "1.3.1, 1.4.3, 2.1.1, 2.4.7, 4.1.2 – minimum 4 guidelines",
+    icon: "♿",
+    iconBg: "#E0F0FF",
+    steps: [
+      { text: "WCAG 1.3.1 – Info and Relationships: use semantic HTML (<header>, <nav>, <main>, <section>, <form>, <table>, <fieldset>, <legend>). role=\"list\"/\"listitem\" on all course/announcement lists.", tags: ["a11y"] },
+      { text: "WCAG 1.3.1 – Table structure: <thead>, <th scope=\"col\">, <tbody>, <tr>, <td> on Grades tables. Every input has <label htmlFor> or aria-label.", tags: ["a11y"] },
+      { text: "WCAG 1.3.1 – ARIA attributes: aria-describedby on inputs, aria-required=\"true\", aria-invalid, role=\"progressbar\" with aria-valuenow/min/max, role=\"dialog\" aria-modal on modals/mobile nav", tags: ["a11y"] },
+      { text: "WCAG 1.4.3 – Contrast: verify heading #1A1A2E on white (~16.5:1), body #4B5563 on white (~7.5:1), error #C0392B on #FFF5F5 (~5.7:1), success #166534 on #E6FAF0 (~7.2:1)", tags: ["a11y"] },
+      { text: "WCAG 2.1.1 – Keyboard: skip links on Layout and Login. All interactive elements use native <button> or <a>. autoFocus on Cancel in modals. aria-expanded on hamburger + accordion buttons.", tags: ["a11y"] },
+      { text: "WCAG 2.4.7 – Focus Visible: focus:outline-2 focus:outline-offset-2 with #5B9BD5 on ALL focusable elements (buttons, links, inputs). No outline:none without visible replacement.", tags: ["a11y"] },
+      { text: "WCAG 4.1.2 – Name, Role, Value: aria-label on all icon-only buttons (hamburger, password toggle, bell, camera, logout, dismiss). aria-label on progress bars (\"Step n of 3: label\", \"n of 20 units enrolled\"). aria-hidden=\"true\" on all decorative icons.", tags: ["a11y"] },
+      { text: "WCAG 4.1.2 – Live regions: aria-live=\"polite\" on login status, toast notifications, loading states. role=\"status\" on banners.", tags: ["a11y"] },
+    ]
+  },
+  {
+    id: "f13",
+    title: "Consistency & Standards",
+    subtitle: "Visual patterns, behavioral conventions, labeling",
+    icon: "✅",
+    iconBg: "#E6FAF0",
+    steps: [
+      { text: "Primary button: rounded-xl, gradient #5B9BD5→#7BBCF0, white text, full-width in forms. Secondary: rounded-xl, transparent bg, border-2 #F9A8C9, text #B5295A.", tags: ["ui"] },
+      { text: "Destructive button: rounded-xl/lg, red #C0392B bg or border. Disabled: disabled:opacity-60 disabled:cursor-not-allowed.", tags: ["ui"] },
+      { text: "Input fields across ALL pages: rounded-xl, border-2 #F9A8C9, bg #FAFAFA, padding px-3 py-2.5 (or px-4 py-3), consistent dynamic border colors.", tags: ["ui"] },
+      { text: "Error messages: AlertCircle icon + red text #C0392B + role=\"alert\" consistently. Success banners: CheckCircle2 + green #E6FAF0 + border #86EFAC.", tags: ["ui", "a11y"] },
+      { text: "Badges/Pills: rounded-full, text-xs font-semibold, semantic colors. All badge colors follow semantic color sets.", tags: ["ui"] },
+      { text: "Behavioral: noValidate + custom validation → inline errors → loading state → success feedback. Simulated API calls: setTimeout 1200–1500ms.", tags: ["logic"] },
+      { text: "Destructive actions ALWAYS show confirmation modal before executing.", tags: ["logic"] },
+      { text: "Active nav indicator: bg #5B9BD5 + white text on active NavLink. end:true on Dashboard to prevent match on /portal/courses etc.", tags: ["ui", "routing"] },
+      { text: "Required field markers: red asterisk `*` with aria-label=\"required\" consistently on ALL required fields across all forms.", tags: ["ui", "a11y"] },
+      { text: "Button labels: action verbs — Sign In, Save Changes, Create Account, Continue, Drop, Add. Placeholder text: \"e.g. {example}\" format on ALL inputs.", tags: ["ui"] },
+    ]
+  },
+  {
+    id: "f14",
+    title: "Responsive Design",
+    subtitle: "Mobile-first breakpoints: default → sm:640px → lg:1024px",
+    icon: "📱",
+    iconBg: "#F3E8FF",
+    steps: [
+      { text: "Layout: hamburger on < lg, avatar initial only on mobile, \"Log Out\" text hidden below sm, full nav + name visible on lg+", tags: ["ui"] },
+      { text: "Dashboard Quick Stats: grid-cols-1 → sm:grid-cols-3", tags: ["ui"] },
+      { text: "Dashboard main grid: stacked on mobile → lg:grid-cols-3 with lg:col-span-2 for courses section", tags: ["ui"] },
+      { text: "Dashboard Quick Actions: grid-cols-2 → sm:grid-cols-4", tags: ["ui"] },
+      { text: "Courses: stacked card content and full-width buttons on mobile → side-by-side on sm+", tags: ["ui"] },
+      { text: "Grades: overflow-x-auto on table wrapper for mobile horizontal scroll. Step labels hidden on mobile.", tags: ["ui"] },
+      { text: "Profile: single-column form fields → 2-col grid for name fields (sm:). 3-col grid for academic info (sm:). Stacked → row action buttons.", tags: ["ui"] },
+      { text: "Login/Register: max-w-md/max-w-lg centered cards — naturally responsive within max-width constraint.", tags: ["ui"] },
+    ]
+  },
+  {
+    id: "f15",
+    title: "Mock Data & Known Constraints",
+    subtitle: "Data inconsistencies, edge cases, no-backend behavior",
+    icon: "⚠️",
+    iconBg: "#FFFBEB",
+    steps: [
+      { text: "Document (code comment) data inconsistency: Dashboard id:2 = 'Object Oriented Programming' vs Grades 'Data Structures 2' for CS 221 — intentional mock mismatch.", tags: ["data"] },
+      { text: "Document GPA mismatch: Dashboard hardcoded '1.50', Grades dynamically computes ~1.66 from semesters — intentional.", tags: ["data"] },
+      { text: "Document units mismatch: Dashboard shows '8 of 21 allowed', Courses enforces max 20 units — intentional.", tags: ["data"] },
+      { text: "Document avatar initials mismatch: Layout header shows 'L', Profile avatar shows 'JD' — cosmetic issue.", tags: ["data"] },
+      { text: "No route protection: users can navigate directly to /portal without logging in. Document this as a known constraint.", tags: ["logic"] },
+      { text: "Search state + filter logic exists in Courses.tsx but no UI input is rendered. Document that the search input was intentionally removed.", tags: ["logic"] },
+      { text: "Modal focus trap is NOT implemented — Tab can escape modals. Document as known keyboard trap risk (WCAG limitation).", tags: ["a11y"] },
+      { text: "All data is hardcoded — changes lost on page refresh. No JWT, sessions, or route guards. Document in README/comments.", tags: ["data"] },
+      { text: "Mark /src/app/components/figma/ImageWithFallback.tsx and /pnpm-lock.yaml as [PROTECTED – DO NOT MODIFY] with code comments.", tags: ["logic"] },
+    ]
+  },
+];
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+// completed = Set of "groupId::stepIndex" strings
+const STORAGE_KEY = 'usa-portal-todo-v1';
+let completed = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+let currentFilter = 'all';
+
+/* ═══════════════════════════════════════════════════════════
+   PERSISTENCE
+═══════════════════════════════════════════════════════════ */
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TOGGLE STEP
+═══════════════════════════════════════════════════════════ */
+function toggleStep(key) {
+  if (completed.has(key)) completed.delete(key);
+  else completed.add(key);
+  save();
+  renderAll();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TOGGLE GROUP OPEN
+═══════════════════════════════════════════════════════════ */
+const openGroups = new Set(FEATURES.map(f => f.id)); // all open by default
+
+function toggleGroup(id) {
+  if (openGroups.has(id)) openGroups.delete(id);
+  else openGroups.add(id);
+  renderAll();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FILTER
+═══════════════════════════════════════════════════════════ */
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAll();
+}
+
+function stepMatchesFilter(groupId, stepIdx, step) {
+  const key = `${groupId}::${stepIdx}`;
+  const isDone = completed.has(key);
+
+  if (currentFilter === 'all') return true;
+  if (currentFilter === 'completed') return isDone;
+  if (currentFilter === 'incomplete') return !isDone;
+  // tag filters
+  return step.tags.includes(currentFilter);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════════════════ */
+function renderAll() {
+  const container = document.getElementById('groups-container');
+  container.innerHTML = '';
+
+  let totalSteps = 0, totalDone = 0;
+  let visibleGroups = 0;
+
+  FEATURES.forEach(feat => {
+    const steps = feat.steps;
+    // which steps match filter AND exist in this group?
+    const visibleSteps = steps.map((s, i) => ({ s, i })).filter(({ s, i }) => stepMatchesFilter(feat.id, i, s));
+    if (visibleSteps.length === 0) return;
+    visibleGroups++;
+
+    const groupDone = steps.filter((_, i) => completed.has(`${feat.id}::${i}`)).length;
+    const groupTotal = steps.length;
+    totalSteps += groupTotal;
+    totalDone += groupDone;
+
+    const isOpen = openGroups.has(feat.id);
+    const pct = groupTotal > 0 ? Math.round((groupDone / groupTotal) * 100) : 0;
+
+    // count class
+    let countClass = 'none';
+    if (groupDone === groupTotal) countClass = 'done';
+    else if (groupDone > 0) countClass = 'partial';
+
+    const groupEl = document.createElement('div');
+    groupEl.className = 'feature-group';
+    groupEl.innerHTML = `
+      <button
+        class="group-header ${isOpen ? 'open' : ''}"
+        onclick="toggleGroup('${feat.id}')"
+        aria-expanded="${isOpen}"
+        aria-controls="steps-${feat.id}"
+      >
+        <div class="group-icon" style="background:${feat.iconBg}">${feat.icon}</div>
+        <div class="group-meta">
+          <div class="group-title">${feat.title}</div>
+          <div class="group-subtitle">${feat.subtitle}</div>
+        </div>
+        <div class="group-right">
+          <div class="mini-prog-track">
+            <div class="mini-prog-fill" style="width:${pct}%"></div>
+          </div>
+          <span class="group-count ${countClass}">${groupDone}/${groupTotal}</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </button>
+
+      <div class="step-list ${isOpen ? 'open' : ''}" id="steps-${feat.id}" role="list">
+        ${visibleSteps.map(({ s, i }) => {
+          const key = `${feat.id}::${i}`;
+          const isDone = completed.has(key);
+          return `
+            <div
+              class="step-item ${isDone ? 'completed' : ''}"
+              role="listitem"
+              onclick="toggleStep('${key}')"
+              tabindex="0"
+              onkeydown="if(event.key==='Enter'||event.key===' '){toggleStep('${key}');event.preventDefault();}"
+              aria-label="${isDone ? 'Mark incomplete' : 'Mark complete'}: ${s.text}"
+            >
+              <div class="checkbox" aria-hidden="true">
+                <svg class="checkmark" viewBox="0 0 10 8">
+                  <polyline points="1 4 4 7 9 1"/>
+                </svg>
+              </div>
+              <span class="step-text">${s.text}</span>
+              ${s.tags.map(t => `<span class="step-tag tag-${t}">${tagLabel(t)}</span>`).join('')}
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+
+    container.appendChild(groupEl);
+  });
+
+  // no results
+  document.getElementById('no-results').style.display = visibleGroups === 0 ? 'block' : 'none';
+
+  // global progress
+  const gpct = totalSteps > 0 ? Math.round((totalDone / totalSteps) * 100) : 0;
+  document.getElementById('global-fill').style.width = `${gpct}%`;
+  document.getElementById('global-pct').textContent = `${totalDone} / ${totalSteps} steps (${gpct}%)`;
+}
+
+function tagLabel(tag) {
+  const map = { ui:'🎨 UI', logic:'⚙️ Logic', a11y:'♿ A11y', data:'💾 Data', routing:'🔀 Routing' };
+  return map[tag] || tag;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
+renderAll();
+</script>
+</body>
+</html>
