@@ -5,91 +5,91 @@
 
 :root {
   /* ── Primary Palette ─────────────────────────────────── */
-  --color-pink:        #FADADD;
-  --color-blue:        #B3D9F7;
-  --color-page-bg:     #FEF0F5;
-  --color-primary:     #5B9BD5;
-  --color-primary-lt:  #7BBCF0;
-  --color-accent:      #E88FAB;
-  --color-deep-pink:   #B5295A;
+  --color-pink: #8d0808;
+  --color-blue: #fce51a;
+  --color-page-bg: #960101;
+  --color-primary: #c2b610;
+  --color-primary-lt: #adb903;
+  --color-accent: #720202;
+  --color-deep-pink: #a00a0a;
 
   /* ── Text Colors ─────────────────────────────────────── */
-  --color-heading:     #1A1A2E;
-  --color-nav:         #2D3556;
-  --color-subtitle:    #5B7BA8;
-  --color-body:        #4B5563;
-  --color-muted:       #6B7280;
-  --color-placeholder: #9CA3AF;
-  --color-light-muted: #9BB8D4;
+  --color-heading: #1a1a2e;
+  --color-nav: #2d3556;
+  --color-subtitle: #5b7ba8;
+  --color-body: #4b5563;
+  --color-muted: #6b7280;
+  --color-placeholder: #9ca3af;
+  --color-light-muted: #9bb8d4;
 
   /* ── Semantic: Success ───────────────────────────────── */
-  --color-success-bg:  #E6FAF0;
-  --color-success-bg2: #DCFCE7;
-  --color-success-bd:  #86EFAC;
-  --color-success-tx:  #166534;
-  --color-success-tx2: #27AE60;
+  --color-success-bg: #e6faf0;
+  --color-success-bg2: #dcfce7;
+  --color-success-bd: #86efac;
+  --color-success-tx: #166534;
+  --color-success-tx2: #27ae60;
 
   /* ── Semantic: Error ─────────────────────────────────── */
-  --color-error-bg:    #FFF5F5;
-  --color-error-bg2:   #FEE2E2;
-  --color-error-bd:    #FCA5A5;
-  --color-error-tx:    #C0392B;
-  --color-error-tx2:   #991B1B;
+  --color-error-bg: #fff5f5;
+  --color-error-bg2: #fee2e2;
+  --color-error-bd: #fca5a5;
+  --color-error-tx: #c0392b;
+  --color-error-tx2: #991b1b;
 
   /* ── Semantic: Warning ───────────────────────────────── */
-  --color-warn-bg:     #FFFBEB;
-  --color-warn-bg2:    #FEF9C3;
-  --color-warn-bd:     #FCD34D;
-  --color-warn-tx:     #B45309;
-  --color-warn-tx2:    #854D0E;
+  --color-warn-bg: #fffbeb;
+  --color-warn-bg2: #fef9c3;
+  --color-warn-bd: #fcd34d;
+  --color-warn-tx: #b45309;
+  --color-warn-tx2: #854d0e;
 
   /* ── Semantic: Info ──────────────────────────────────── */
-  --color-info-bg:     #EBF4FE;
-  --color-info-bg2:    #DBEAFE;
-  --color-info-bd:     #90CAF9;
-  --color-info-tx:     #1E5FA8;
-  --color-info-tx2:    #5B9BD5;
+  --color-info-bg: #ebf4fe;
+  --color-info-bg2: #dbeafe;
+  --color-info-bd: #90caf9;
+  --color-info-tx: #1e5fa8;
+  --color-info-tx2: #5b9bd5;
 
   /* ── Surfaces ────────────────────────────────────────── */
-  --color-card:        #FFFFFF;
-  --color-input-bg:    #FAFAFA;
-  --color-input-bg-err:#FFF5F5;
-  --color-input-bd:    #F9A8C9;
-  --color-input-bd-ok: #27AE60;
-  --color-input-bd-err:#C0392B;
-  --color-divider:     #F3E0E8;
+  --color-card: #ffffff;
+  --color-input-bg: #fafafa;
+  --color-input-bg-err: #fff5f5;
+  --color-input-bd: #f9a8c9;
+  --color-input-bd-ok: #27ae60;
+  --color-input-bd-err: #c0392b;
+  --color-divider: #f3e0e8;
 
   /* ── Gradients ───────────────────────────────────────── */
-  --grad-header:       linear-gradient(135deg, #FADADD 0%, #B3D9F7 100%);
-  --grad-page:         linear-gradient(135deg, #FADADD 0%, #EBF4FE 60%, #B3D9F7 100%);
-  --grad-btn-primary:  linear-gradient(135deg, #5B9BD5, #7BBCF0);
-  --grad-avatar:       linear-gradient(135deg, #E88FAB, #5B9BD5);
-  --grad-mobile-nav:   linear-gradient(180deg, #FADADD 0%, #EBF4FE 100%);
-  --grad-gpa-pink:     linear-gradient(135deg, #FADADD, #FFE4EC);
-  --grad-gpa-blue:     linear-gradient(135deg, #EBF4FE, #DBEAFE);
-  --grad-gpa-green:    linear-gradient(135deg, #E6FAF0, #DCFCE7);
-  --grad-progress:     linear-gradient(90deg, #E88FAB, #5B9BD5);
-  --grad-progress-warn:linear-gradient(90deg, #F59E0B, #EF4444);
-  --grad-reg-progress: linear-gradient(90deg, #E88FAB, #5B9BD5);
+  --grad-header: linear-gradient(135deg, #fadadd 0%, #b3d9f7 100%);
+  --grad-page: linear-gradient(135deg, #fadadd 0%, #ebf4fe 60%, #b3d9f7 100%);
+  --grad-btn-primary: linear-gradient(135deg, #5b9bd5, #7bbcf0);
+  --grad-avatar: linear-gradient(135deg, #e88fab, #5b9bd5);
+  --grad-mobile-nav: linear-gradient(180deg, #fadadd 0%, #ebf4fe 100%);
+  --grad-gpa-pink: linear-gradient(135deg, #fadadd, #ffe4ec);
+  --grad-gpa-blue: linear-gradient(135deg, #ebf4fe, #dbeafe);
+  --grad-gpa-green: linear-gradient(135deg, #e6faf0, #dcfce7);
+  --grad-progress: linear-gradient(90deg, #e88fab, #5b9bd5);
+  --grad-progress-warn: linear-gradient(90deg, #f59e0b, #ef4444);
+  --grad-reg-progress: linear-gradient(90deg, #e88fab, #5b9bd5);
 
   /* ── Spacing & Sizing ────────────────────────────────── */
-  --radius-card:   1rem;      /* rounded-2xl */
-  --radius-input:  0.75rem;   /* rounded-xl  */
-  --radius-btn:    0.75rem;
-  --radius-badge:  9999px;
-  --radius-modal:  1rem;
+  --radius-card: 1rem; /* rounded-2xl */
+  --radius-input: 0.75rem; /* rounded-xl  */
+  --radius-btn: 0.75rem;
+  --radius-badge: 9999px;
+  --radius-modal: 1rem;
 
-  --shadow-sm:   0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md:   0 4px 12px rgba(91,155,213,0.12);
-  --shadow-lg:   0 8px 30px rgba(91,155,213,0.18);
-  --shadow-2xl:  0 20px 60px rgba(0,0,0,0.18);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(91, 155, 213, 0.12);
+  --shadow-lg: 0 8px 30px rgba(91, 155, 213, 0.18);
+  --shadow-2xl: 0 20px 60px rgba(0, 0, 0, 0.18);
 
   /* ── Focus ───────────────────────────────────────────── */
-  --focus-ring: 0 0 0 3px rgba(91,155,213,0.45);
-  --focus-outline: 2px solid #5B9BD5;
+  --focus-ring: 0 0 0 3px rgba(91, 155, 213, 0.45);
+  --focus-outline: 2px solid #5b9bd5;
   --focus-offset: 2px;
 
   /* ── Transitions ─────────────────────────────────────── */
-  --transition-fast:   0.15s ease;
+  --transition-fast: 0.15s ease;
   --transition-normal: 0.25s ease;
 }
