@@ -5,72 +5,72 @@
 
 :root {
   /* ── Primary Palette ─────────────────────────────────── */
-  --color-pink: #8d0808;
-  --color-blue: #fce51a;
-  --color-page-bg: #960101;
-  --color-primary: #c2b610;
-  --color-primary-lt: #adb903;
-  --color-accent: #720202;
-  --color-deep-pink: #a00a0a;
+  --color-pink: #fff1e6;
+  --color-blue: #ffe5a6;
+  --color-page-bg: #fff8f0;
+  --color-primary: #a30015;
+  --color-primary-lt: #d62828;
+  --color-accent: #f2b705;
+  --color-deep-pink: #7a0010;
 
   /* ── Text Colors ─────────────────────────────────────── */
-  --color-heading: #1a1a2e;
-  --color-nav: #2d3556;
-  --color-subtitle: #5b7ba8;
-  --color-body: #4b5563;
-  --color-muted: #6b7280;
-  --color-placeholder: #9ca3af;
-  --color-light-muted: #9bb8d4;
+  --color-heading: #2a120f;
+  --color-nav: #3a1914;
+  --color-subtitle: #7a3b24;
+  --color-body: #4b2e23;
+  --color-muted: #7a6456;
+  --color-placeholder: #a18a7b;
+  --color-light-muted: #c89d87;
 
   /* ── Semantic: Success ───────────────────────────────── */
-  --color-success-bg: #e6faf0;
-  --color-success-bg2: #dcfce7;
-  --color-success-bd: #86efac;
-  --color-success-tx: #166534;
-  --color-success-tx2: #27ae60;
+  --color-success-bg: #eef9ef;
+  --color-success-bg2: #dff4df;
+  --color-success-bd: #8ecf96;
+  --color-success-tx: #1f5f2b;
+  --color-success-tx2: #2d7a3a;
 
   /* ── Semantic: Error ─────────────────────────────────── */
-  --color-error-bg: #fff5f5;
-  --color-error-bg2: #fee2e2;
-  --color-error-bd: #fca5a5;
-  --color-error-tx: #c0392b;
-  --color-error-tx2: #991b1b;
+  --color-error-bg: #fff2f2;
+  --color-error-bg2: #ffe3e3;
+  --color-error-bd: #ef9a9a;
+  --color-error-tx: #a0131f;
+  --color-error-tx2: #7f0d17;
 
   /* ── Semantic: Warning ───────────────────────────────── */
-  --color-warn-bg: #fffbeb;
-  --color-warn-bg2: #fef9c3;
-  --color-warn-bd: #fcd34d;
-  --color-warn-tx: #b45309;
-  --color-warn-tx2: #854d0e;
+  --color-warn-bg: #fff8e8;
+  --color-warn-bg2: #fff1c7;
+  --color-warn-bd: #efc75e;
+  --color-warn-tx: #8f5a00;
+  --color-warn-tx2: #704700;
 
   /* ── Semantic: Info ──────────────────────────────────── */
-  --color-info-bg: #ebf4fe;
-  --color-info-bg2: #dbeafe;
-  --color-info-bd: #90caf9;
-  --color-info-tx: #1e5fa8;
-  --color-info-tx2: #5b9bd5;
+  --color-info-bg: #fff8e6;
+  --color-info-bg2: #ffefc2;
+  --color-info-bd: #f2c94c;
+  --color-info-tx: #7a4b00;
+  --color-info-tx2: #b57a00;
 
   /* ── Surfaces ────────────────────────────────────────── */
   --color-card: #ffffff;
-  --color-input-bg: #fafafa;
-  --color-input-bg-err: #fff5f5;
-  --color-input-bd: #f9a8c9;
-  --color-input-bd-ok: #27ae60;
-  --color-input-bd-err: #c0392b;
-  --color-divider: #f3e0e8;
+  --color-input-bg: #fffdf9;
+  --color-input-bg-err: #fff2f2;
+  --color-input-bd: #e4b85a;
+  --color-input-bd-ok: #2d7a3a;
+  --color-input-bd-err: #a0131f;
+  --color-divider: #f1d8b5;
 
   /* ── Gradients ───────────────────────────────────────── */
-  --grad-header: linear-gradient(135deg, #fadadd 0%, #b3d9f7 100%);
-  --grad-page: linear-gradient(135deg, #fadadd 0%, #ebf4fe 60%, #b3d9f7 100%);
-  --grad-btn-primary: linear-gradient(135deg, #5b9bd5, #7bbcf0);
-  --grad-avatar: linear-gradient(135deg, #e88fab, #5b9bd5);
-  --grad-mobile-nav: linear-gradient(180deg, #fadadd 0%, #ebf4fe 100%);
-  --grad-gpa-pink: linear-gradient(135deg, #fadadd, #ffe4ec);
-  --grad-gpa-blue: linear-gradient(135deg, #ebf4fe, #dbeafe);
-  --grad-gpa-green: linear-gradient(135deg, #e6faf0, #dcfce7);
-  --grad-progress: linear-gradient(90deg, #e88fab, #5b9bd5);
+  --grad-header: linear-gradient(135deg, #8c0012 0%, #c1121f 60%, #f2b705 100%);
+  --grad-page: linear-gradient(135deg, #fffdf8 0%, #fff2cc 55%, #f8d7da 100%);
+  --grad-btn-primary: linear-gradient(135deg, #a30015, #d62828);
+  --grad-avatar: linear-gradient(135deg, #c1121f, #f2b705);
+  --grad-mobile-nav: linear-gradient(180deg, #fff2cc 0%, #ffe3b3 100%);
+  --grad-gpa-pink: linear-gradient(135deg, #ffe5e7, #ffd4a8);
+  --grad-gpa-blue: linear-gradient(135deg, #fff4d6, #ffe6a3);
+  --grad-gpa-green: linear-gradient(135deg, #f3faec, #dcf1d2);
+  --grad-progress: linear-gradient(90deg, #c1121f, #f2b705);
   --grad-progress-warn: linear-gradient(90deg, #f59e0b, #ef4444);
-  --grad-reg-progress: linear-gradient(90deg, #e88fab, #5b9bd5);
+  --grad-reg-progress: linear-gradient(90deg, #c1121f, #f2b705);
 
   /* ── Spacing & Sizing ────────────────────────────────── */
   --radius-card: 1rem; /* rounded-2xl */
@@ -80,13 +80,13 @@
   --radius-modal: 1rem;
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(91, 155, 213, 0.12);
-  --shadow-lg: 0 8px 30px rgba(91, 155, 213, 0.18);
+  --shadow-md: 0 4px 12px rgba(161, 0, 21, 0.16);
+  --shadow-lg: 0 8px 30px rgba(161, 0, 21, 0.22);
   --shadow-2xl: 0 20px 60px rgba(0, 0, 0, 0.18);
 
   /* ── Focus ───────────────────────────────────────────── */
-  --focus-ring: 0 0 0 3px rgba(91, 155, 213, 0.45);
-  --focus-outline: 2px solid #5b9bd5;
+  --focus-ring: 0 0 0 3px rgba(193, 18, 31, 0.35);
+  --focus-outline: 2px solid #c1121f;
   --focus-offset: 2px;
 
   /* ── Transitions ─────────────────────────────────────── */
