@@ -1,0 +1,13 @@
+Brief Overview of the System
+
+The University of San Agustin Student Portal is a web-based academic access system designed to help students manage their school-related tasks in one place. It provides core student functions such as viewing the dashboard, checking enrolled courses, reviewing grades, and updating profile information through a simple browser-based interface.
+
+The current version of the system is intended as a student portal modernization project that replaces a cluttered and outdated-looking interface with a cleaner, more organized, and more user-friendly experience. The goal is to make navigation easier, improve visual consistency, and present information in a way that feels faster and more approachable for everyday use.
+
+Problem Statement
+
+I am trying to revise the USA MasterSoft system of the University of San Agustin because the current user interface looks very clunky and stuffy. The main buttons are hidden, which makes the system difficult to navigate, and the query processing takes a long time, making the site feel slow and less responsive to users.
+
+Target User Group and Rationale
+
+The target user group for this project is the students of the University of San Agustin. They are the primary users who regularly need to access academic information such as class schedules, enrolled subjects, and grades. Improving the portal for students is important because they rely on it frequently, and a clearer, faster, and easier-to-use interface will directly improve their daily academic experience.

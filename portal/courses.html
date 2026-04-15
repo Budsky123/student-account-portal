@@ -1,126 +1,218 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Courses | Student Portal | University of San Agustin</title>
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="../css/main.css" />
-  
-  <!-- JS -->
-  <script src="../js/auth.js"></script>
-  <script>Auth.requireAuth();</script>
-  <script src="../js/layout.js" defer></script>
-  <script src="../js/design-note.js" defer></script>
-  <script src="../js/courses.js" defer></script>
-</head>
-<body class="bg-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Courses | Student Portal | University of San Agustin</title>
 
-  <!-- Inject header -->
-  <div id="layout-header"></div>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
-  <main id="main-content" class="main-content" tabindex="-1">
-    <div class="page-container space-y-6">
-      
-      <!-- Page Header -->
-      <div class="page-section-header">
-        <div>
-          <h1 class="text-3xl font-bold text-heading">My Classes</h1>
-          <div class="text-sm text-subtitle mt-1">1st Semester, A.Y. 2025-2026</div>
-        </div>
-        <div id="units-header-badge" class="badge badge-pink text-sm" style="font-size: 0.9rem; padding: 0.35rem 0.85rem;" aria-label="Units enrolled">
-          <!-- Filled by JS -->
-        </div>
-      </div>
+    <!-- JS -->
+    <script src="../assets/js/auth.js"></script>
+    <script>
+      Auth.requireAuth();
+    </script>
+    <script src="../assets/js/layout.js" defer></script>
+    <script src="../assets/js/design-note.js" defer></script>
+    <script src="../assets/js/course-store.js" defer></script>
+    <script src="../assets/js/courses.js" defer></script>
+  </head>
+  <body class="bg-page">
+    <!-- Inject header -->
+    <div id="layout-header"></div>
 
-      <!-- Units Progress Bar -->
-      <div class="card card-sm">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-nav font-semibold text-sm">Units Enrolled</span>
-          <span class="text-muted text-xs" id="units-text"></span>
-        </div>
-        <div class="progress-track" role="progressbar" id="units-progress-container">
-          <div class="progress-fill" id="units-fill" style="width: 0%;"></div>
-        </div>
-        <div id="units-warning-msg" class="text-error text-xs font-semibold mt-2 hidden" role="alert">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" class="inline" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Maximum units reached. You cannot enroll in any more classes.
-        </div>
-        
-        <div class="design-notes-row" style="margin-top: 1rem;">
-          <div data-design-note label="H1: System Status (units)" type="heuristic"></div>
-        </div>
-      </div>
-
-      <!-- Enrolled Classes -->
-      <div>
+    <main id="main-content" class="main-content" tabindex="-1">
+      <div class="page-container space-y-6">
+        <!-- Page Header -->
         <div class="page-section-header">
-          <h2 class="page-section-title">Enrolled Classes</h2>
-          <div data-design-note label="H3: User Control (undo/cancel)" type="heuristic"></div>
-        </div>
-        
-        <div id="empty-enrolled-state" class="empty-state hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           <div>
-            <div class="empty-state-title">You are not enrolled in any classes yet.</div>
-            <div class="empty-state-sub">Browse available classes below to get started.</div>
+            <h1 class="text-3xl font-bold text-heading">My Classes</h1>
+            <div class="text-sm text-subtitle mt-1">
+              1st Semester, A.Y. 2025-2026
+            </div>
+          </div>
+          <div
+            id="units-header-badge"
+            class="badge badge-pink text-sm"
+            style="font-size: 0.9rem; padding: 0.35rem 0.85rem"
+            aria-label="Units enrolled"
+          >
+            <!-- Filled by JS -->
           </div>
         </div>
 
-        <div class="space-y-4" id="enrolled-list" role="list">
-          <!-- Rendered by JS -->
+        <!-- Units Progress Bar -->
+        <div class="card card-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-nav font-semibold text-sm">Units Enrolled</span>
+            <span class="text-muted text-xs" id="units-text"></span>
+          </div>
+          <div
+            class="progress-track"
+            role="progressbar"
+            id="units-progress-container"
+          >
+            <div class="progress-fill" id="units-fill" style="width: 0%"></div>
+          </div>
+          <div
+            id="units-warning-msg"
+            class="text-error text-xs font-semibold mt-2 hidden"
+            role="alert"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="inline"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            Maximum units reached. You cannot enroll in any more classes.
+          </div>
+
+          <div class="design-notes-row" style="margin-top: 1rem">
+            <div
+              data-design-note
+              label="H1: System Status (units)"
+              type="heuristic"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Enrolled Classes -->
+        <div>
+          <div class="page-section-header">
+            <h2 class="page-section-title">Enrolled Classes</h2>
+            <div
+              data-design-note
+              label="H3: User Control (undo/cancel)"
+              type="heuristic"
+            ></div>
+          </div>
+
+          <div id="empty-enrolled-state" class="empty-state hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+            </svg>
+            <div>
+              <div class="empty-state-title">
+                You are not enrolled in any classes yet.
+              </div>
+              <div class="empty-state-sub">
+                Browse available classes below to get started.
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4" id="enrolled-list" role="list">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Add Classes -->
+        <div>
+          <div class="page-section-header">
+            <h2 class="page-section-title">Add More Classes</h2>
+            <div
+              data-design-note
+              label="H5: Error Prevention (disabled add)"
+              type="heuristic"
+            ></div>
+          </div>
+
+          <div class="space-y-4" id="available-list" role="list">
+            <!-- Rendered by JS -->
+          </div>
         </div>
       </div>
+    </main>
 
-      <div class="divider"></div>
-
-      <!-- Add Classes -->
-      <div>
-        <div class="page-section-header">
-          <h2 class="page-section-title">Add More Classes</h2>
-          <div data-design-note label="H5: Error Prevention (disabled add)" type="heuristic"></div>
+    <!-- Modal: Drop Confirmation -->
+    <div
+      id="drop-modal"
+      class="modal-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="drop-modal-title"
+    >
+      <div class="modal-card">
+        <h3 id="drop-modal-title" class="modal-title">Drop Class</h3>
+        <div class="modal-body">
+          Are you sure you want to drop <strong id="drop-course-name"></strong>?
+          This action will remove it from your current schedule.
         </div>
-
-        <div class="space-y-4" id="available-list" role="list">
-          <!-- Rendered by JS -->
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn btn-secondary modal-cancel-btn"
+            id="drop-cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="btn btn-destructive"
+            id="drop-confirm-btn"
+          >
+            Yes, Drop Class
+          </button>
         </div>
       </div>
-
     </div>
-  </main>
 
-  <!-- Modal: Drop Confirmation -->
-  <div id="drop-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="drop-modal-title">
-    <div class="modal-card">
-      <h3 id="drop-modal-title" class="modal-title">Drop Class</h3>
-      <div class="modal-body">
-        Are you sure you want to drop <strong id="drop-course-name"></strong>? This action will remove it from your current schedule.
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-secondary modal-cancel-btn" id="drop-cancel-btn">Cancel</button>
-        <button type="button" class="btn btn-destructive" id="drop-confirm-btn">Yes, Drop Class</button>
+    <!-- Modal: Add Confirmation -->
+    <div
+      id="add-modal"
+      class="modal-overlay hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="add-modal-title"
+    >
+      <div class="modal-card">
+        <h3 id="add-modal-title" class="modal-title">Add Class</h3>
+        <div class="modal-body">
+          You are about to enroll in <strong id="add-course-name"></strong>.
+          This will bring your total to
+          <strong id="add-new-units"></strong> units. Do you wish to continue?
+        </div>
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn btn-secondary modal-cancel-btn"
+            id="add-cancel-btn"
+          >
+            Cancel
+          </button>
+          <button type="button" class="btn btn-primary" id="add-confirm-btn">
+            Confirm Add
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Modal: Add Confirmation -->
-  <div id="add-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="add-modal-title">
-    <div class="modal-card">
-      <h3 id="add-modal-title" class="modal-title">Add Class</h3>
-      <div class="modal-body">
-        You are about to enroll in <strong id="add-course-name"></strong>. This will bring your total to <strong id="add-new-units"></strong> units. Do you wish to continue?
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-secondary modal-cancel-btn" id="add-cancel-btn">Cancel</button>
-        <button type="button" class="btn btn-primary" id="add-confirm-btn">Confirm Add</button>
-      </div>
-    </div>
-  </div>
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-  <!-- Toast Container -->
-  <div id="toast-container" class="toast-container" aria-live="polite"></div>
-
-  <script defer src="/_vercel/insights/script.js"></script>
-</body>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
 </html>

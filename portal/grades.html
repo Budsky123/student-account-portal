@@ -1,104 +1,174 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grades | Student Portal | University of San Agustin</title>
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="../css/main.css" />
-  
-  <!-- JS -->
-  <script src="../js/auth.js"></script>
-  <script>Auth.requireAuth();</script>
-  <script src="../js/layout.js" defer></script>
-  <script src="../js/design-note.js" defer></script>
-  <script src="../js/grades.js" defer></script>
-</head>
-<body class="bg-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grades | Student Portal | University of San Agustin</title>
 
-  <!-- Inject header -->
-  <div id="layout-header"></div>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
-  <main id="main-content" class="main-content" tabindex="-1">
-    <div class="page-container space-y-6">
-      
-      <!-- Page Header -->
-      <div class="page-section-header" style="align-items: center;">
-        <div>
-          <h1 class="text-3xl font-bold text-heading">Academic Record</h1>
-          <div class="text-sm text-subtitle mt-1">Bachelor of Science in Computer Science</div>
+    <!-- JS -->
+    <script src="../assets/js/auth.js"></script>
+    <script>
+      Auth.requireAuth();
+    </script>
+    <script src="../assets/js/layout.js" defer></script>
+    <script src="../assets/js/design-note.js" defer></script>
+    <script src="../assets/js/grades.js" defer></script>
+  </head>
+  <body class="bg-page">
+    <!-- Inject header -->
+    <div id="layout-header"></div>
+
+    <main id="main-content" class="main-content" tabindex="-1">
+      <div class="page-container space-y-6">
+        <!-- Page Header -->
+        <div class="page-section-header" style="align-items: center">
+          <div>
+            <h1 class="text-3xl font-bold text-heading">Academic Record</h1>
+            <div class="text-sm text-subtitle mt-1">
+              Bachelor of Science in Computer Science
+            </div>
+          </div>
+
+          <div class="design-notes-row hidden sm-show-flex">
+            <div
+              data-design-note
+              label="H1: System Status"
+              type="heuristic"
+            ></div>
+          </div>
         </div>
-        
-        <div class="design-notes-row hidden sm-show-flex">
-          <div data-design-note label="H1: System Status" type="heuristic"></div>
+
+        <!-- GPA Summary -->
+        <div class="grid grid-1" data-grid-sm="3">
+          <div class="stat-card" style="background: var(--grad-gpa-pink)">
+            <div
+              class="icon-container md"
+              style="
+                background: #fff;
+                color: var(--color-deep-pink);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                <polyline points="16 7 22 7 22 13" />
+              </svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-label">Cumulative GWA</div>
+              <div class="stat-value" id="cumulative-gpa">--</div>
+              <div class="stat-sub">Based on completed terms</div>
+            </div>
+          </div>
+
+          <div class="stat-card" style="background: var(--grad-gpa-blue)">
+            <div
+              class="icon-container md"
+              style="
+                background: #fff;
+                color: var(--color-primary);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
+                />
+                <path d="M12 12v9" />
+                <path d="m8 17 4 4 4-4" />
+              </svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-label">Current Midterm Avg</div>
+              <div class="stat-value" id="current-midterm">--</div>
+              <div class="stat-sub">Current semester subjects only</div>
+            </div>
+          </div>
+
+          <div class="stat-card" style="background: var(--grad-gpa-green)">
+            <div
+              class="icon-container md"
+              style="
+                background: #fff;
+                color: var(--color-success-tx2);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-label">Units Completed</div>
+              <div class="stat-value" id="total-credits">--</div>
+              <div class="stat-sub">Final grades posted</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grade Scale Legend -->
+        <div class="card card-sm">
+          <div class="page-section-header" style="margin-bottom: 0.65rem">
+            <h2 class="page-section-title" style="font-size: 0.95rem">
+              Grade Scale
+            </h2>
+          </div>
+          <div class="flex flex-wrap gap-2" aria-label="Grade scale legend">
+            <span class="badge badge-success">1.00 Excellent</span>
+            <span class="badge badge-blue">1.25-1.50 Very Good</span>
+            <span class="badge badge-warning">1.75-2.00 Average</span>
+            <span class="badge badge-error">2.25-3.00 Passing</span>
+            <span class="badge badge-gray">5.00 Failed</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Terms Accordion -->
+        <div class="page-section-header">
+          <h2 class="page-section-title">Term Grades</h2>
+        </div>
+
+        <div id="grades-accordion" class="space-y-4">
+          <!-- Rendered by JS -->
         </div>
       </div>
+    </main>
 
-      <!-- GPA Summary -->
-      <div class="grid grid-1" data-grid-sm="3">
-        <div class="stat-card" style="background: var(--grad-gpa-pink);">
-          <div class="icon-container md" style="background: #fff; color: var(--color-deep-pink); box-shadow: var(--shadow-sm);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          </div>
-          <div class="stat-card-body">
-            <div class="stat-label">Cumulative GWA</div>
-            <div class="stat-value" id="cumulative-gpa">--</div>
-            <div class="stat-sub">Based on completed terms</div>
-          </div>
-        </div>
-        
-        <div class="stat-card" style="background: var(--grad-gpa-blue);">
-          <div class="icon-container md" style="background: #fff; color: var(--color-primary); box-shadow: var(--shadow-sm);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/></svg>
-          </div>
-          <div class="stat-card-body">
-            <div class="stat-label">Current Midterm Avg</div>
-            <div class="stat-value" id="current-midterm">--</div>
-            <div class="stat-sub">Current semester subjects only</div>
-          </div>
-        </div>
-
-        <div class="stat-card" style="background: var(--grad-gpa-green);">
-          <div class="icon-container md" style="background: #fff; color: var(--color-success-tx2); box-shadow: var(--shadow-sm);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          </div>
-          <div class="stat-card-body">
-            <div class="stat-label">Units Completed</div>
-            <div class="stat-value" id="total-credits">--</div>
-            <div class="stat-sub">Final grades posted</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Grade Scale Legend -->
-      <div class="card card-sm">
-        <div class="page-section-header" style="margin-bottom: 0.65rem;">
-          <h2 class="page-section-title" style="font-size: 0.95rem;">Grade Scale</h2>
-        </div>
-        <div class="flex flex-wrap gap-2" aria-label="Grade scale legend">
-          <span class="badge badge-success">1.00 Excellent</span>
-          <span class="badge badge-blue">1.25-1.50 Very Good</span>
-          <span class="badge badge-warning">1.75-2.00 Average</span>
-          <span class="badge badge-error">2.25-3.00 Passing</span>
-          <span class="badge badge-gray">5.00 Failed</span>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- Terms Accordion -->
-      <div class="page-section-header">
-        <h2 class="page-section-title">Term Grades</h2>
-      </div>
-
-      <div id="grades-accordion" class="space-y-4">
-        <!-- Rendered by JS -->
-      </div>
-      
-    </div>
-  </main>
-
-  <script defer src="/_vercel/insights/script.js"></script>
-</body>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
 </html>

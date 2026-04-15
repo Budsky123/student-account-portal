@@ -1,0 +1,146 @@
+5.3 User Research
+
+Research Methodology Used
+
+I used Google Forms to collect user feedback from students. The form included questions about the current portal design, navigation, speed, and overall ease of use. This method was chosen because it allowed quick collection of responses from multiple participants in a convenient and familiar format.
+
+Summary of Findings from 5 Participants
+
+1. Participant 1 said the portal feels outdated and crowded. They mentioned that important buttons are not easy to find, especially when trying to access grades and class information.
+2. Participant 2 reported that the site is slow to respond when loading pages or searching for information. They said this makes the system feel unreliable during busy periods.
+3. Participant 3 found the interface confusing because too many elements compete for attention. They wanted a cleaner layout with clearer labels and more visible navigation options.
+4. Participant 4 said they mostly use the portal on mobile and struggled with small buttons and sections that are hard to tap. They preferred a mobile-friendly design with larger controls.
+5. Participant 5 stated that the portal is useful but not visually appealing and takes too long to complete common tasks. They suggested simplifying the homepage and reducing unnecessary clutter.
+
+Overall, the responses showed that users want a cleaner interface, faster loading time, and easier navigation. The most common issues were cluttered layout, hidden or hard-to-find buttons, and slow query processing.
+
+User Persona 1
+
+Name: Maria Santos
+Photo Placeholder: [Insert photo of a female college student here]
+Goals:
+- Check grades quickly
+- View enrolled classes without confusion
+- Access portal features easily on mobile
+Frustrations:
+- Buttons are hard to find
+- Pages feel slow to load
+- The layout looks crowded and outdated
+Tech Proficiency:
+- Moderate. Comfortable using smartphones and basic web apps, but prefers simple and clear interfaces.
+
+User Persona 2
+
+Name: Joshua Dela Cruz
+Photo Placeholder: [Insert photo of a male college student here]
+Goals:
+- Register for classes faster
+- Review schedule and academic records in one place
+- Complete tasks with minimal clicks
+Frustrations:
+- Navigation is not intuitive
+- Important actions are hidden in the interface
+- The portal sometimes feels unresponsive
+Tech Proficiency:
+- High. Uses digital tools often, but still values speed and clear organization.
+
+User Stories
+
+1. As a student, I want to easily find the main buttons so that I can navigate the portal without confusion.
+2. As a student, I want pages to load faster so that I can complete my tasks without wasting time.
+3. As a student, I want a cleaner and less crowded interface so that I can focus on the information I need.
+4. As a student, I want a mobile-friendly layout so that I can use the portal comfortably on my phone.
+5. As a student, I want clear labels and visible sections so that I can understand where to go for grades, classes, and profile information.
+
+5.4 Design Process
+
+Task Flow / User Journey Diagram (Text Description)
+
+1. Sign in on the Login page (validate Student ID and password)
+2. Land on Dashboard (see quick stats and announcements)
+3. Navigate to My Courses (add or drop classes, confirm via modal)
+4. Check Grades (open semester accordion, review tables)
+5. Update Profile (edit fields, save changes)
+6. Log out (return to Login)
+
+Style Guide (Colors, Typography, Icons, Components)
+
+Colors: Warm red and gold gradients for headers and primary buttons, cream-toned page backgrounds, and consistent semantic colors for success, warning, error, and info states. The palette is implemented via CSS variables in tokens.css.
+Typography: Inter font family with readable sizes for headings and form labels, plus a consistent base font size for body text.
+Icons: Simple line icons (SVG) for navigation and status cues to reduce visual clutter.
+Components: Cards, buttons (primary and secondary), inputs with validation states, badges/pills, modal dialogs, toast notifications, progress bars, step indicators, and a shared header/navigation layout.
+
+Hi-fi Mockups with Annotations (Design Decisions)
+
+- Header gradient and prominent page titles communicate portal identity and improve recognition.
+- Active navigation highlight guides users to their current section and reduces navigation errors.
+- Form validation uses inline error messages and red borders for quick error recovery.
+- Progress indicators (registration steps, units bar) provide visibility of system status.
+- Cards and spacing reduce clutter and group related content for faster scanning.
+
+5.5 Prototype Description
+
+Tool/Platform Used and Rationale
+
+The prototype was built using HTML, CSS, and vanilla JavaScript in VS Code. This approach allows fast iteration, a simple folder structure, and easy hosting as a static site without build tools.
+
+Overview of Core Features and Interactions Implemented
+
+- Login form with input validation and simulated loading states
+- Registration wizard with multi-step progress and required-field validation
+- Dashboard with quick stats, announcements, and shortcut actions
+- Courses page with add/drop flow, confirmation modals, and toast feedback
+- Grades page with semester accordion and structured grade tables
+- Profile page with editable fields, validation, and save state feedback
+- Responsive navigation with a mobile drawer menu
+
+5.6 Usability Testing
+
+Test Plan (Objectives, Tasks Assigned, Participant Profile)
+
+Objectives:
+- Check if users can find grades and courses quickly
+- Evaluate clarity of navigation and labels
+- Validate form feedback for login and registration
+- Observe ease of use on mobile and desktop
+
+Tasks Assigned:
+1. Sign in using a sample Student ID and password.
+2. Locate the Grades page and open the current semester.
+3. Add a course and then drop a course on the My Courses page.
+4. Update the profile email and save changes.
+5. Use the mobile menu to go back to Dashboard.
+
+Participant Profile:
+- 5 student participants (mix of 1st to 4th year)
+- 3 primarily mobile users, 2 desktop users
+- All participants familiar with the existing university portal
+
+Testing Team:
+Napoleon Luis V. Pedroso, Janicah Lieh Vasquez, Hazel Marie Garganera, John Andrei Calendas
+
+Recruitment and Consent Process
+
+Participants were recruited via class group chats. Each participant was told the prototype was for a student project, that no real accounts would be used, and that feedback would be anonymized. Verbal consent was collected before starting each session.
+
+Summary of Findings: Errors, Confusion Points, Positive Feedback
+
+Common Errors and Confusion Points:
+1. Some users assumed the Register link was for class registration instead of account creation.
+2. A few users did not notice the mobile menu icon immediately and tried to scroll for links.
+3. On the Courses page, one participant expected the Add button to appear on the enrolled list.
+4. Two participants tried clicking a grade row instead of the semester header to expand the accordion.
+5. One participant did not notice the unsaved changes warning on the Profile page before leaving.
+
+Positive Feedback:
+1. The dashboard cards were described as clean and easy to scan.
+2. Users liked the progress indicator in the registration flow.
+3. The color coding for grades made results easier to understand.
+4. The confirmation modals and toast messages reduced anxiety about mistakes.
+
+Recommendations and Changes Made After Testing
+
+- Clarified the Register link text to mention account creation.
+- Added short helper text near the mobile menu icon to improve discoverability.
+- Added a short hint on the Grades page to click the semester header to expand.
+- Increased visibility of the unsaved changes banner on the Profile page.
